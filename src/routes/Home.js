@@ -18,13 +18,17 @@ const Home = () => {
   return (
     <Container>
       <Header>
-        <Title>Apollo 2020</Title>
-        <Subtitle>I Love GraphQL</Subtitle>
+        <Title>Apollo-Movie</Title>
+        <Subtitle>Movie App Based on Apollo & GraphQL</Subtitle>
       </Header>
       {loading && <Loading>Loading...</Loading>}
-      {!loading &&
-        data.movies &&
-        data.movies.map(({ id }) => <Movie key={id} id={id} />)}
+      {!loading && data.movies && (
+        <Movies>
+          {data.movies.map(({ id, medium_cover_image }) => (
+            <Movie key={id} id={id} bg={medium_cover_image} />
+          ))}
+        </Movies>
+      )}
     </Container>
   );
 };
@@ -58,6 +62,15 @@ const Loading = styled.div`
   opacity: 0.5;
   font-weight: 500;
   margin-top: 10px;
+`;
+
+const Movies = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
+  width: 60%;
+  position: relative;
+  top: -50px;
 `;
 
 export default Home;
