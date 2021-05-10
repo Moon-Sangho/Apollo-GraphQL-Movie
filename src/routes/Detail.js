@@ -23,11 +23,13 @@ const Detail = () => {
   return (
     <Container>
       <Column>
-        <Title>Name</Title>
-        <Subtitle>English · 4.5</Subtitle>
-        <Description>lorem ipsum lalalla </Description>
+        <Title>{loading ? "Loading..." : data.movie.title}</Title>
+        <Subtitle>
+          {data?.movie?.language} ・ {data?.movie?.rating}
+        </Subtitle>
+        <Description>{data?.movie?.description_intro}</Description>
       </Column>
-      <Poster></Poster>
+      <Poster bg={data?.movie?.medium_cover_image}></Poster>
     </Container>
   );
 };
@@ -44,6 +46,7 @@ const Container = styled.div`
 
 const Column = styled.div`
   margin-left: 10px;
+  width: 50%;
 `;
 
 const Title = styled.h1`
@@ -63,7 +66,10 @@ const Description = styled.p`
 const Poster = styled.div`
   width: 25%;
   height: 60%;
+  background-image: url(${(props) => props.bg});
   background-color: transparent;
+  background-size: cover;
+  background-position: center center;
 `;
 
 export default Detail;

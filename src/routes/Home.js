@@ -13,7 +13,7 @@ const GET_MOVIES = gql`
 `;
 
 const Home = () => {
-  const { loading, error, data } = useQuery(GET_MOVIES);
+  const { loading, data } = useQuery(GET_MOVIES);
 
   return (
     <Container>
@@ -22,13 +22,11 @@ const Home = () => {
         <Subtitle>Movie App Based on Apollo & GraphQL</Subtitle>
       </Header>
       {loading && <Loading>Loading...</Loading>}
-      {!loading && data.movies && (
-        <Movies>
-          {data.movies.map(({ id, medium_cover_image }) => (
-            <Movie key={id} id={id} bg={medium_cover_image} />
-          ))}
-        </Movies>
-      )}
+      <Movies>
+        {data?.movies?.map(({ id, medium_cover_image }) => (
+          <Movie key={id} id={id} bg={medium_cover_image} />
+        ))}
+      </Movies>
     </Container>
   );
 };
